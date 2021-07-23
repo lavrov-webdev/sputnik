@@ -9,16 +9,24 @@ import Dialogs from "./Components/Dialogs/Dialogs";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 
-const App = () => {
+const App = ({ state, addPost }) => {
   return (
     <BrowserRouter>
-      <div className="container test">
+      <div className="container">
         <Header />
         <div className="row">
           <Aside />
           <main className="col-10">
-            <Route path="/profile" component={Profile} />
-            <Route path="/dialogs" component={Dialogs} />
+            <Route
+              path="/profile"
+              render={() => (
+                <Profile addPost={addPost} state={state.profilePage} />
+              )}
+            />
+            <Route
+              path="/dialogs"
+              render={() => <Dialogs state={state.dialogsPage} />}
+            />
             <Route path="/news" component={News} />
             <Route path="/music" component={Music} />
           </main>

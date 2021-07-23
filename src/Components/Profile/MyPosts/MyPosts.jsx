@@ -1,21 +1,24 @@
-import React from "react";
+import React, { createRef } from "react";
 import Post from "./Post/Post";
 
-export default function MyPosts() {
+export default function MyPosts(props) {
+  const { addPost } = props;
 
-  const postData = [
-    {id: 1, text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'},
-    {id: 2, text: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'},
-    {id: 3, text: 'With supporting text below as a natural lead-in to additional content.'},
-    {id: 4, text: 'With supporting text below as a natural lead-in to additional content.'},
-  ]
+  const newPostElement = createRef();
+
+  const submitFormHandler = (e) => {
+    e.preventDefault();
+    addPost(newPostElement.current.value);
+    console.log(newPostElement.current.value);
+  };
 
   return (
     <div className="col-12 mt-5">
-      <form>
+      <form onSubmit={(e) => submitFormHandler(e)}>
         <div className="row justify-content-end">
           <div className="form-group">
             <textarea
+              ref={newPostElement}
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
@@ -30,7 +33,9 @@ export default function MyPosts() {
       </form>
       <div className="mt-4">
         <h3>My posts</h3>
-        {postData.map(post => <Post likesCount={post.id} postText={post.text}/>)}
+        {props.postData.map((post) => (
+          <Post likesCount={post.id} postText={post.text} />
+        ))}
       </div>
     </div>
   );
