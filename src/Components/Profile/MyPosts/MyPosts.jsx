@@ -2,14 +2,13 @@ import React, { createRef } from "react";
 import Post from "./Post/Post";
 
 export default function MyPosts(props) {
-  const { addPost } = props;
+  const { addPost, updateNewPostText } = props;
 
   const newPostElement = createRef();
 
   const submitFormHandler = (e) => {
     e.preventDefault();
     addPost(newPostElement.current.value);
-    console.log(newPostElement.current.value);
   };
 
   return (
@@ -22,7 +21,9 @@ export default function MyPosts(props) {
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
-            ></textarea>
+              value={props.newPostText}
+              onChange={(e) => updateNewPostText(e.target.value)}
+            />
           </div>
           <div className="col-2 mt-2">
             <button type="submit" className="btn btn-primary w-100 p-2">
