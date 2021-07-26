@@ -9,8 +9,7 @@ let renderEntire = () => {
   ReactDOM.render(
     <React.StrictMode>
       <App
-        addPost={store.addPost.bind(store)}
-        updateNewPostText={store.updateNewPostText.bind(store)}
+        dispatch={store.dipatch.bind(store)}
         state={store.getSate()}
       />
     </React.StrictMode>,

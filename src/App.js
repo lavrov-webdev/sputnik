@@ -9,7 +9,7 @@ import Dialogs from "./Components/Dialogs/Dialogs";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 
-const App = ({ state, addPost, updateNewPostText }) => {
+const App = ({ state, dispatch }) => {
   return (
     <BrowserRouter>
       <div className="container">
@@ -21,8 +21,7 @@ const App = ({ state, addPost, updateNewPostText }) => {
               path="/profile"
               render={() => (
                 <Profile
-                  updateNewPostText={updateNewPostText}
-                  addPost={addPost}
+                  dispatch={dispatch}
                   state={state.profilePage}
                 />
               )}

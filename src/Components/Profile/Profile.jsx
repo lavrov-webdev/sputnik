@@ -3,7 +3,7 @@ import Banner from "./Banner/Banner";
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-export default function Profile({ state, addPost, updateNewPostText }) {
+export default function Profile({ state, dispatch }) {
   return (
     <div className="row g-0">
       <Banner />
@@ -11,8 +11,7 @@ export default function Profile({ state, addPost, updateNewPostText }) {
       <MyPosts
         newPostText={state.newPostText}
         postData={state.postData}
-        addPost={addPost}
-        updateNewPostText={updateNewPostText}
+        dispatch={dispatch}
       />
     </div>
   );

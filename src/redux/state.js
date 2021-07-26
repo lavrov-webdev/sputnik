@@ -37,24 +37,27 @@ let store = {
       ],
     },
   },
-  getSate() {
-    return this._state;
-  },
   _callSubscriber() {
     console.log("state changed");
   },
-  addPost(text) {
-    this._state.profilePage.postData.push({ id: 5, text });
-    this._state.profilePage.newPostText = "";
-    this._callSubscriber();
-  },
-  updateNewPostText(value) {
-    this._state.profilePage.newPostText = value;
-    this._callSubscriber();
+
+  getSate() {
+    return this._state;
   },
   subscribe(observer) {
     this._callSubscriber = observer;
   },
+
+  dipatch(action) {
+    if (action.type === 'ADD-POST') {
+      this._state.profilePage.postData.push({ id: 5, text: this._state.profilePage.newPostText });
+      this._state.profilePage.newPostText = "";
+      this._callSubscriber();
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPostText = action.value;
+      this._callSubscriber();
+    }
+  }
 };
 
 export default store;
