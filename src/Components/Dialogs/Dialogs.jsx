@@ -1,17 +1,16 @@
 import React, { createRef } from "react";
 import { NavLink } from "react-router-dom";
+import { addNewMessage, updateNewMessageText } from "../../redux/state";
 
 import DialogsItem from "./DialogItem/DialogsItem";
 
 import classes from "./Dialogs.module.css";
 import Message from "./Message/Message";
 
-export default function Dialogs({ state }) {
-  const newMessageElement = createRef();
-
-  const sendMessage = () => {
-    const text = newMessageElement.current.value;
-    alert(text);
+export default function Dialogs({ state, dispatch }) {
+  const sendMessage = (e) => {
+    e.preventDefault();
+    dispatch(addNewMessage());
   };
 
   return (
@@ -37,15 +36,18 @@ export default function Dialogs({ state }) {
               <div className="row justify-content-end">
                 <div className="form-group">
                   <textarea
-                    ref={newMessageElement}
                     className="form-control"
                     id="exampleFormControlTextarea1"
                     rows="3"
+                    value={state.newMessageText}
+                    onChange={(e) =>
+                      dispatch(updateNewMessageText(e.target.value))
+                    }
                   ></textarea>
                 </div>
                 <div className="col-2 mt-2">
                   <button
-                    onClick={sendMessage}
+                    onClick={(e) => sendMessage(e)}
                     type="submit"
                     className="btn btn-primary w-100 p-2"
                   >

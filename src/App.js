@@ -20,15 +20,14 @@ const App = ({ state, dispatch }) => {
             <Route
               path="/profile"
               render={() => (
-                <Profile
-                  dispatch={dispatch}
-                  state={state.profilePage}
-                />
+                <Profile dispatch={dispatch} state={state.profilePage} />
               )}
             />
             <Route
               path="/dialogs"
-              render={() => <Dialogs state={state.dialogsPage} />}
+              render={() => (
+                <Dialogs dispatch={dispatch} state={state.dialogsPage} />
+              )}
             />
             <Route path="/news" component={News} />
             <Route path="/music" component={Music} />
