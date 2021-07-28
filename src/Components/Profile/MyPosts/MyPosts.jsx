@@ -2,7 +2,7 @@ import React, { createRef } from "react";
 import {
   addPostActionCreator,
   updateNewPostTextActionCreator,
-} from "../../../redux/state";
+} from "../../../redux/profile-reducer";
 import Post from "./Post/Post";
 
 export default function MyPosts(props) {

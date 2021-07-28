@@ -1,6 +1,9 @@
 import React, { createRef } from "react";
 import { NavLink } from "react-router-dom";
-import { addNewMessage, updateNewMessageText } from "../../redux/state";
+import {
+  addNewMessage,
+  updateNewMessageText,
+} from "../../redux/dialogs-reduce";
 
 import DialogsItem from "./DialogItem/DialogsItem";
 
