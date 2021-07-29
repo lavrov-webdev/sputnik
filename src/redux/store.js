@@ -47,7 +47,7 @@ let store = {
     console.log("state changed");
   },
 
-  getSate() {
+  getState() {
     return this._state;
   },
   subscribe(observer) {

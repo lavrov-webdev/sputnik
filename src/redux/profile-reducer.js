@@ -11,7 +11,7 @@ export const updateNewPostTextActionCreator = (value) => ({
 });
 
 let initialState = {
-  postData: [
+  posts: [
     {
       id: 1,
       text: "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.",
@@ -35,7 +35,7 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      state.postData.push({
+      state.posts.push({
         id: 5,
         text: state.newPostText,
       });

@@ -1,19 +1,13 @@
-import React, { createRef } from "react";
-import { NavLink } from "react-router-dom";
-import {
-  addNewMessage,
-  updateNewMessageText,
-} from "../../redux/dialogs-reduce";
-
+import React from "react";
 import DialogsItem from "./DialogItem/DialogsItem";
 
 import classes from "./Dialogs.module.css";
 import Message from "./Message/Message";
 
-export default function Dialogs({ state, dispatch }) {
-  const sendMessage = (e) => {
+export default function Dialogs(props) {
+  const onSendMessage = (e) => {
     e.preventDefault();
-    dispatch(addNewMessage());
+    props.sendMessage();
   };
 
   return (
@@ -21,7 +15,7 @@ export default function Dialogs({ state, dispatch }) {
       <div className="col-12 col-md-4 border-end">
         <div className="row g-0 navbar-light">
           <ul className="list-group">
-            {state.dialogsData.map((dialogLink) => (
+            {props.dialogsData.map((dialogLink) => (
               <DialogsItem name={dialogLink.name} id={dialogLink.id} />
             ))}
           </ul>
@@ -29,7 +23,7 @@ export default function Dialogs({ state, dispatch }) {
       </div>
       <div className="col-12 col-md-8">
         <div className="row g-0">
-          {state.messagesData.map((message) => (
+          {props.messagesData.map((message) => (
             <Message message={message.message} id={message.id} />
           ))}
         </div>
@@ -42,15 +36,13 @@ export default function Dialogs({ state, dispatch }) {
                     className="form-control"
                     id="exampleFormControlTextarea1"
                     rows="3"
-                    value={state.newMessageText}
-                    onChange={(e) =>
-                      dispatch(updateNewMessageText(e.target.value))
-                    }
+                    value={props.newMessageText}
+                    onChange={(e) => props.updateNewMessageText(e.target.value)}
                   ></textarea>
                 </div>
                 <div className="col-2 mt-2">
                   <button
-                    onClick={(e) => sendMessage(e)}
+                    onClick={(e) => onSendMessage(e)}
                     type="submit"
                     className="btn btn-primary w-100 p-2"
                   >

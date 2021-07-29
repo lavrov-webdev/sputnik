@@ -6,13 +6,9 @@ import {
 import Post from "./Post/Post";
 
 export default function MyPosts(props) {
-  const { dispatch } = props;
-
-  const newPostElement = createRef();
-
   const submitFormHandler = (e) => {
     e.preventDefault();
-    dispatch(addPostActionCreator());
+    props.addPost();
   };
 
   return (
@@ -21,14 +17,11 @@ export default function MyPosts(props) {
         <div className="row justify-content-end">
           <div className="form-group">
             <textarea
-              ref={newPostElement}
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
-              value={props.newPostText}
-              onChange={(e) =>
-                dispatch(updateNewPostTextActionCreator(e.target.value))
-              }
+              value={props.profile.newPostText}
+              onChange={(e) => props.updateNewPostText(e.target.value)}
             />
           </div>
           <div className="col-2 mt-2">
@@ -40,7 +33,7 @@ export default function MyPosts(props) {
       </form>
       <div className="mt-4">
         <h3>My posts</h3>
-        {props.postData.map((post) => (
+        {props.profile.posts.map((post) => (
           <Post likesCount={post.id} postText={post.text} />
         ))}
       </div>
