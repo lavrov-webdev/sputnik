@@ -15,7 +15,7 @@ export default function Dialogs(props) {
       <div className="col-12 col-md-4 border-end">
         <div className="row g-0 navbar-light">
           <ul className="list-group">
-            {props.dialogsData.map((dialogLink) => (
+            {props.dialogs.dialogsData.map((dialogLink) => (
               <DialogsItem name={dialogLink.name} id={dialogLink.id} />
             ))}
           </ul>
@@ -23,7 +23,7 @@ export default function Dialogs(props) {
       </div>
       <div className="col-12 col-md-8">
         <div className="row g-0">
-          {props.messagesData.map((message) => (
+          {props.dialogs.messagesData.map((message) => (
             <Message message={message.message} id={message.id} />
           ))}
         </div>
