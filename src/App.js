@@ -8,8 +8,9 @@ import Profile from "./Components/Profile/Profile";
 import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
+import UsersContainer from "./Components/Users/UsersContainer";
 
-const App = ({ state, dispatch, store }) => {
+const App = () => {
   return (
     <BrowserRouter>
       <div className="container">
@@ -19,6 +20,7 @@ const App = ({ state, dispatch, store }) => {
           <main className="col-10">
             <Route path="/profile" render={() => <Profile />} />
             <Route path="/dialogs" render={() => <DialogsContainer />} />
+            <Route path="/users" component={UsersContainer} />
             <Route path="/news" component={News} />
             <Route path="/music" component={Music} />
           </main>

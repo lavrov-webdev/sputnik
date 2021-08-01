@@ -6,19 +6,13 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import store from "./redux/redux-store";
 
-let renderEntire = () => {
-  ReactDOM.render(
-    <React.StrictMode>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </React.StrictMode>,
-    document.getElementById("root")
-  );
-};
-
-renderEntire();
-
-store.subscribe(renderEntire);
+ReactDOM.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </React.StrictMode>,
+  document.getElementById("root")
+);
 
 reportWebVitals();

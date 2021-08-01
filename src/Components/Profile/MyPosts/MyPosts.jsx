@@ -34,7 +34,7 @@ export default function MyPosts(props) {
       <div className="mt-4">
         <h3>My posts</h3>
         {props.profile.posts.map((post) => (
-          <Post likesCount={post.id} postText={post.text} />
+          <Post key={post.id} likesCount={post.id} postText={post.text} />
         ))}
       </div>
     </div>

@@ -16,7 +16,11 @@ export default function Dialogs(props) {
         <div className="row g-0 navbar-light">
           <ul className="list-group">
             {props.dialogs.dialogsData.map((dialogLink) => (
-              <DialogsItem name={dialogLink.name} id={dialogLink.id} />
+              <DialogsItem
+                key={dialogLink.id}
+                name={dialogLink.name}
+                id={dialogLink.id}
+              />
             ))}
           </ul>
         </div>
@@ -24,7 +28,11 @@ export default function Dialogs(props) {
       <div className="col-12 col-md-8">
         <div className="row g-0">
           {props.dialogs.messagesData.map((message) => (
-            <Message message={message.message} id={message.id} />
+            <Message
+              key={message.id}
+              message={message.message}
+              id={message.id}
+            />
           ))}
         </div>
         <div className="row g-0 mt-4">
@@ -36,7 +44,7 @@ export default function Dialogs(props) {
                     className="form-control"
                     id="exampleFormControlTextarea1"
                     rows="3"
-                    value={props.newMessageText}
+                    value={props.dialogs.newMessageText}
                     onChange={(e) => props.updateNewMessageText(e.target.value)}
                   ></textarea>
                 </div>
