@@ -22,17 +22,17 @@ export default function Aside() {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="news" aria-current="page">
+                <NavLink className="nav-link" to="/news" aria-current="page">
                   News
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="music" aria-current="page">
+                <NavLink className="nav-link" to="/music" aria-current="page">
                   Music
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="users" aria-current="page">
+                <NavLink className="nav-link" to="/users" aria-current="page">
                   Users
                 </NavLink>
               </li>

@@ -1,13 +1,11 @@
 import React from "react";
-import Banner from "./Banner/Banner";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-export default function Profile() {
+export default function Profile(props) {
   return (
-    <div className="row g-0">
-      <Banner />
-      <ProfileInfo />
+    <div className="row">
+      <ProfileInfo profile={props.profile} />
       <MyPostsContainer />
     </div>
   );

@@ -1,42 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import {
-  follow,
-  setPage,
-  setTotalUsersCount,
-  setUsers,
-  unfollow,
-  toggleIsFetching,
-} from "../../redux/users-reducer";
+import { follow, setPage, unfollow, getUsers } from "../../redux/users-reducer";
 import Users from "./Users";
-import Spinner from "../UI Components/Spinner";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount);
-        this.props.toggleIsFetching(false);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   paginationClickHandler(pageNumber) {
     this.props.setPage(pageNumber);
-    this.props.toggleIsFetching(true);
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.toggleIsFetching(false);
-      });
+    this.props.getUsers(pageNumber, this.props.pageSize);
   }
 
   render() {
@@ -50,7 +24,6 @@ class UsersContainer extends React.Component {
           users={this.props.users}
           unfollow={this.props.unfollow}
           follow={this.props.follow}
-          isFetching={this.props.isFetching}
         />
       </>
     );
@@ -68,10 +41,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   follow,
   unfollow,
-  setUsers,
   setPage,
-  setTotalUsersCount,
-  toggleIsFetching,
+  getUsers,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);

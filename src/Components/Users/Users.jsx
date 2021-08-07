@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import userPhotoPlaceholder from "../../assets/images/user-placeholder.jpeg";
 import Spinner from "../UI Components/Spinner";
 
@@ -39,28 +40,46 @@ export default function Users(props) {
           {props.users.map((user) => (
             <div key={user.id} className="col">
               <div className="card h-100 p-3">
-                <img
-                  src={
-                    user.photos.large ? user.photos.large : userPhotoPlaceholder
-                  }
-                  className="card-img-top"
-                />
+                <NavLink className="p-3" to={`/profile/${user.id}`}>
+                  <img
+                    src={
+                      user.photos.large
+                        ? user.photos.large
+                        : userPhotoPlaceholder
+                    }
+                    className="card-img-top"
+                  />
+                </NavLink>
                 <div className="card-body">
-                  <h5 className="card-title">{user.name}</h5>
+                  <NavLink
+                    className="link-dark text-decoration-none"
+                    to={`/profile/${user.id}`}
+                  >
+                    <h5 className="card-title">{user.name}</h5>
+                  </NavLink>
                   <h6 className="card-subtitle text-muted">{user.status}</h6>
 
-                  <button
-                    className={`mt-4 btn btn-${
-                      user.follow ? "danger" : "success"
-                    }`}
-                    onClick={(e) =>
-                      user.follow
-                        ? props.unfollow(user.id)
-                        : props.follow(user.id)
-                    }
-                  >
-                    {user.follow ? "Unfollow" : "Follow"}
-                  </button>
+                  {user.followed ? (
+                    <button
+                      className="btn btn-danger mt-3"
+                      onClick={() => {
+                        props.unfollow(user.id);
+                      }}
+                      disabled={user.followingInProgress}
+                    >
+                      Unfollow
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-success mt-3"
+                      onClick={() => {
+                        props.follow(user.id);
+                      }}
+                      disabled={user.followingInProgress}
+                    >
+                      Follow
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
