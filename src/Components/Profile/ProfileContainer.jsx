@@ -17,6 +17,7 @@ class ProfileContainer extends Component {
 
 const mapStateToProps = (state) => ({
   profile: state.profile.profile,
+  isAuth: state.auth.isAuth,
 });
 
 const mapDispatchToProps = { getUserData };

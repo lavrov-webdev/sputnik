@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import DialogsItem from "./DialogItem/DialogsItem";
 
 import classes from "./Dialogs.module.css";
@@ -9,6 +10,10 @@ export default function Dialogs(props) {
     e.preventDefault();
     props.sendMessage();
   };
+
+  if (!props.isAuth) {
+    return <Redirect to={"/login"} />;
+  }
 
   return (
     <div className="row g-5">

@@ -31,9 +31,9 @@ export const followAPI = {
 
 export const authAPI = {
   auth() {
-    return instance
-      .get(`/auth/me`)
-      .then((response) => ({ ...response.data.data }));
+    return instance.get(`/auth/me`).then((response) => {
+      return { ...response.data.data, resultCode: response.data.resultCode };
+    });
   },
 };
 
