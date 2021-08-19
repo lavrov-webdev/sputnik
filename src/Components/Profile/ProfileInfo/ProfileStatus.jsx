@@ -8,7 +8,6 @@ export default class ProfileStatus extends Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.statusText !== this.props.statusText) {
-      debugger
       this.setState({
         statusText: this.props.statusText
       })

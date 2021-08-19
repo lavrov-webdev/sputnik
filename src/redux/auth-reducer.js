@@ -51,7 +51,7 @@ export const loginUser = (email, password, rememberMe) => (dispatch) => {
   dispatch(toggleIsFetching())
   authAPI.login(email, password, rememberMe).then((response) => {
     if (response.resultCode === 0) {
-      dispatch(setUserData({id: response.data.userId, login: 'login', email, password}))
+      dispatch(authUser())
     }
     dispatch(toggleIsFetching())
   });
