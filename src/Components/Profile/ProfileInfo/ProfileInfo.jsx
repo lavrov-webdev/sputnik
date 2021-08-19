@@ -2,7 +2,8 @@ import React from "react";
 import classes from "./ProfileInfo.module.css";
 import Spinner from "../../UI Components/Spinner";
 import userPhotoPlaceholder from "../../../assets/images/user-placeholder.jpeg";
-export default function ProfileInfo({ profile }) {
+import ProfileStatus from "./ProfileStatus";
+export default function ProfileInfo({ profile, status, updateStatus }) {
   if (!profile) return <Spinner />;
   return (
     <>
@@ -17,7 +18,8 @@ export default function ProfileInfo({ profile }) {
       <div className="col-4">
         <ul className="list-group list-group-flush">
           <li className="list-group-item pt-0">
-            <h5>{profile.fullName}</h5>
+            <h5 className='text-capitalize'>{profile.fullName}</h5>
+            <ProfileStatus updateStatus={updateStatus} statusText={status}/>
           </li>
           {Object.entries(profile.contacts).map(
             ([key, value]) =>

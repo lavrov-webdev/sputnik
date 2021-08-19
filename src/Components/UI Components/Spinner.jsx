@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Spinner({ width = "2rem", height = "2rem" }) {
+export default function Spinner({ width = "2rem", height = "2rem", style = 'text-primary' }) {
   return (
     <div
-      className="spinner-border text-primary"
+      className={`spinner-border ${style}`}
       role="status"
       style={{ width, height }}
     >

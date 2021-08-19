@@ -35,12 +35,27 @@ export const authAPI = {
       return { ...response.data.data, resultCode: response.data.resultCode };
     });
   },
+  login(email, password, rememberMe) {
+    return instance
+      .post(`/auth/login`, { email, password, rememberMe })
+      .then((response) => ({ ...response.data }));
+  },
 };
 
 export const profileAPI = {
   getProfile(id) {
     return instance
       .get(`/profile/${id}`)
+      .then((response) => ({ ...response.data }));
+  },
+  getStatus(id) {
+    return instance
+      .get(`/profile/status/${id}`)
+      .then((response) => response.data);
+  },
+  updateStatus(status) {
+    return instance
+      .put(`/profile/status/`, { status })
       .then((response) => ({ ...response.data }));
   },
 };

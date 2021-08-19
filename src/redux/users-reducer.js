@@ -56,7 +56,7 @@ const usersReducer = (state = initialState, action) => {
       };
     case TOGGLE_FOLLOWING_IN_PROGRESS:
       const tempusers = state.users.map((u) =>
-        u.id != action.id ? u : { ...u, followingInProgress: action.value }
+        u.id !== action.id ? u : { ...u, followingInProgress: action.value }
       );
       return {
         ...state,
