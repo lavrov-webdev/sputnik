@@ -1,15 +1,16 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import calsses from "./Aside.module.css";
+import cn from 'classnames'
 
 export default function Aside() {
   return (
     <aside className="col-2">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light h-100 align-items-start">
+        <div className="container-fluid sticky-top">
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul
-              className={`navbar-nav me-auto mb-2 mb-lg-0 ${calsses.verticalNav}`}
+              className={cn('navbar-nav me-auto mb-2 mb-lg-0', [calsses.verticalNav])}
             >
               <li className="nav-item">
                 <NavLink className="nav-link" aria-current="page" to="/profile">

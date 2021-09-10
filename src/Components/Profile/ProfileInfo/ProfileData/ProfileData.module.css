@@ -1,0 +1,12 @@
+.settingsWrapper {
+  overflow: hidden;
+}
+
+.settingsButton {
+  transform: translateY(100%);
+  transition: all .3s;
+}
+
+.wrapper:hover .settingsButton {
+  transform: none;
+}

@@ -2,10 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Logo from "../Logo";
 
-export default function Header({ isAuth, setUserData }) {
-  const logout = () => {
-    setUserData({ id: null, login: null, email: null, isAuth: false });
-  };
+export default function Header({ isAuth, logoutUser }) {
 
   return (
     <header className="p-3 row">
@@ -17,7 +14,7 @@ export default function Header({ isAuth, setUserData }) {
           <NavLink
             className="link-secondary text-decoration-none fs-5 fw-bold"
             to="/profile"
-            onClick={logout}
+            onClick={logoutUser}
           >
             Logout
           </NavLink>

@@ -1,36 +1,15 @@
 import React, { createRef } from "react";
-import {
-  addPostActionCreator,
-  updateNewPostTextActionCreator,
-} from "../../../redux/profile-reducer";
+import NewPostForm from "./NewPostForm";
 import Post from "./Post/Post";
 
 export default function MyPosts(props) {
-  const submitFormHandler = (e) => {
-    e.preventDefault();
-    props.addPost();
+  const submitFormHandler = (formData) => {
+    props.addPost(formData.postText)
   };
 
   return (
     <div className="col-12 mt-5">
-      <form onSubmit={(e) => submitFormHandler(e)}>
-        <div className="row justify-content-end">
-          <div className="form-group">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              value={props.profile.newPostText}
-              onChange={(e) => props.updateNewPostText(e.target.value)}
-            />
-          </div>
-          <div className="col-2 mt-2">
-            <button type="submit" className="btn btn-primary w-100 p-2">
-              Publish
-            </button>
-          </div>
-        </div>
-      </form>
+      <NewPostForm onSubmit={submitFormHandler}/>
       <div className="mt-4">
         <h3>My posts</h3>
         {props.profile.posts.map((post) => (

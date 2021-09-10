@@ -1,0 +1,42 @@
+.profilePicture {
+  max-width: 100%;
+}
+
+.profileImageWrapper {
+  overflow: hidden;
+  position: relative;
+}
+
+.showModalButton {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 25px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, .4);
+  transition: all .3s;
+  transform: translateY(100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.profileImageWrapper:hover .showModalButton{
+  transform: translateY(0);
+}
+
+.settingIcon {
+  cursor: pointer;
+  display: inline;
+}
+
+.settingIcon path {
+  transition: all .3s;
+  opacity: .5;
+}
+
+.settingIcon:hover path {
+  opacity: 1;
+}
