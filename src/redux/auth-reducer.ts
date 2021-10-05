@@ -1,14 +1,15 @@
-import { LoginDataType } from '../types/index';
-import { AppStateType } from './redux-store';
+import { InferActionsType, LoginDataType } from "../types/index";
+import { AppStateType } from "./redux-store";
 import { stopSubmit } from "redux-form";
 import { ThunkAction } from "redux-thunk";
-import { authAPI, securityAPI } from "../api/api";
-import { ResultCodesEnum } from '../enums/enums';
+import { securityAPI } from "../api/security-api";
+import { authAPI } from "../api/auth-api";
+import { ResultCodesEnum } from "../enums/enums";
 
 const SET_USER_DATA = "/auth/SET_USER_DATA";
 const TOGGLE_IS_FETCHING = "/auth/TOGGLE_IS_FETCHING";
 const SET_TO_INITIAL = "/auth/SET_TO_INITIAL";
-const GET_CAPTCHA_SUCCESS = "auth/GET_CAPTCHA_SUCCESS";
+const GET_CAPTCHA_SUCCESS = "/auth/GET_CAPTCHA_SUCCESS";
 
 const initialState = {
 	id: null as null | number,
@@ -21,11 +22,7 @@ const initialState = {
 
 type InitialStateType = typeof initialState;
 
-type ActionsTypes =
-	| SetUserDataTypeAction
-	| ToggleIsFetchingTypeAction
-	| SetToInitialStateTypeAction
-	| GetCaptchaSuccessTypeAction;
+type ActionsTypes = InferActionsType<typeof actions>
 
 const authReducer = (
 	state = initialState,
@@ -52,89 +49,66 @@ const authReducer = (
 			return state;
 	}
 };
-
-type SetUserDataTypeGet = {
-	id: number;
-	login: string;
-	email: string;
-	isAuth: boolean;
+export const actions = {
+	setUserData: (data: any) => {
+		return {
+			type: SET_USER_DATA,
+			data: { ...data },
+		} as const;
+	},
+	toggleIsFetching: () => ({
+		type: TOGGLE_IS_FETCHING,
+	} as const),
+	setToInitialState: () => ({
+		type: SET_TO_INITIAL,
+	} as const),
+	getCaptchaSuccess: (url: string) => ({
+		type: GET_CAPTCHA_SUCCESS,
+		url,
+	} as const),
 };
 
-type SetUserDataTypeAction = {
-	type: typeof SET_USER_DATA;
-	data: SetUserDataTypeGet;
-};
-
-export const setUserData = (
-	data: SetUserDataTypeGet
-): SetUserDataTypeAction => {
-	return {
-		type: SET_USER_DATA,
-		data: { ...data },
-	};
-};
-
-type ToggleIsFetchingTypeAction = {
-	type: typeof TOGGLE_IS_FETCHING;
-};
-
-export const toggleIsFetching = (): ToggleIsFetchingTypeAction => ({
-	type: TOGGLE_IS_FETCHING,
-});
-
-type SetToInitialStateTypeAction = {
-	type: typeof SET_TO_INITIAL;
-};
-
-export const setToInitialState = (): SetToInitialStateTypeAction => ({
-	type: SET_TO_INITIAL,
-});
-
-type GetCaptchaSuccessTypeAction = {
-	type: typeof GET_CAPTCHA_SUCCESS;
-	url: string;
-};
-
-export const getCaptchaSuccess = (
-	url: string
-): GetCaptchaSuccessTypeAction => ({
-	type: GET_CAPTCHA_SUCCESS,
-	url,
-});
-
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
+type ThunkType = ThunkAction<
+	Promise<void>,
+	AppStateType,
+	unknown,
+	ActionsTypes
+>;
 
 export const authUser = (): ThunkType => async (dispatch) => {
 	const data = await authAPI.auth();
-	dispatch(setUserData({ ...data, isAuth: data.resultCode === 0 }));
+	dispatch(actions.setUserData({ ...data, isAuth: data.resultCode === 0 }));
 };
 
-export const loginUser = (loginData: LoginDataType): ThunkType => async (dispatch) => {
-	dispatch(toggleIsFetching());
-	const response = await authAPI.login({ ...loginData });
+export const loginUser =
+	(loginData: LoginDataType): ThunkType =>
+	async (dispatch) => {
+		dispatch(actions.toggleIsFetching());
+		const response = await authAPI.login({ ...loginData });
 
-	if (response.resultCode === 0) {
-		dispatch(authUser());
-	} else {
-		if (response.resultCode === ResultCodesEnum.CaptchaIsRequired) dispatch(getCaptcha());
-		const errorMessage = !!response.messages.length
-			? response.messages[0]
-			: "Some error";
-		dispatch(stopSubmit("login", { _error: errorMessage }));
-	}
-	dispatch(toggleIsFetching());
-};
+		if (response.resultCode === 0) {
+			dispatch(authUser());
+		} else {
+			if (response.resultCode === ResultCodesEnum.CaptchaIsRequired)
+				dispatch(getCaptcha());
+			const errorMessage = !!response.messages.length
+				? response.messages[0]
+				: "Some error";
+			dispatch(stopSubmit("login", { _error: errorMessage }));
+		}
+		dispatch(actions.toggleIsFetching());
+	};
 
 export const logoutUser = (): ThunkType => async (dispatch) => {
 	const response = await authAPI.logout();
 	if (response.resultCode === 0) {
-		dispatch(setToInitialState());
+		dispatch(actions.setToInitialState());
 	}
 };
 
 export const getCaptcha = (): ThunkType => async (dispatch) => {
 	const responce = await securityAPI.getCaptcha();
-	dispatch(getCaptchaSuccess(responce.url));
+	dispatch(actions.getCaptchaSuccess(responce.url));
 };
 
 export default authReducer;

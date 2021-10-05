@@ -1,7 +1,7 @@
 import { AppStateType } from './redux-store';
 import { PostType, ProfilePhotosType, ProfileType } from "../types/index";
 import { stopSubmit } from "redux-form";
-import { profileAPI } from "../api/api";
+import { profileAPI } from "../api/profile-api";
 import { ThunkAction } from 'redux-thunk';
 
 const ADD_POST = "/profile/ADD_POST",

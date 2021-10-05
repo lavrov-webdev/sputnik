@@ -1,3 +1,6 @@
+type PropertiesType<T> = T extends {[key: string]:infer U } ? U : never
+export type InferActionsType<T extends {[key: string]: (...args:any) => any}> = ReturnType<PropertiesType<T>>
+
 export type ProfilePhotosType = {
   small: string | null;
   large: string | null;

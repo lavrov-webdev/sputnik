@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { AppStateType } from "../../redux/redux-store";
 import { getUsersSelector, getCurrentPAge, getIsFetching, getPageSize, getTotalUsersCount } from "../../redux/selectors/users-selectros";
 import { UserType } from "../../types";
-import { getUsers, follow, setPage, unfollow } from "../../redux/users-reducer";
+import { actions, follow, getUsers, unfollow } from "../../redux/users-reducer";
 import Users from "./Users";
 
 type MapStateToPropsType = {
@@ -62,8 +62,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 const mapDispatchToProps = {
   follow,
   unfollow,
-  setPage,
-  getUsers,
+  setPage: actions.setPage,
+  getUsers
 };
 
 export default connect<MapStateToPropsType, MapDispatchToPropsType, undefined, AppStateType>(mapStateToProps, mapDispatchToProps)(UsersContainer);
