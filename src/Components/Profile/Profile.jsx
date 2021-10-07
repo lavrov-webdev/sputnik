@@ -7,12 +7,6 @@ export default function Profile(props) {
     <div className="row">
       <ProfileInfo
         {...props}
-        // updateProfileData={props.updateProfileData}
-        // uploadProfilePhoto={props.uploadProfilePhoto}
-        // isOwner={props.isOwner}
-        // updateStatus={props.updateStatus}
-        // status={props.status}
-        // profile={props.profile}
       />
       <MyPostsContainer />
     </div>

@@ -1,36 +1,29 @@
 import { LoginDataType } from '../types/index';
-import { instance } from './api';
-import { ResultCodesEnum } from '../enums/enums';
+import { instance, ResponceType } from './api';
 
-type AuthResponceType = {
-  data: {id: number, email: string, login: string},
-  resultCode: ResultCodesEnum,
-  messages: Array<string>
+type AuthResponceDataType = {
+  id: number
+  email: string
+  login: string
 }
-type LoginResponceType = {
-  resultCode: ResultCodesEnum,
-  messages: Array<string>,
-  data: {userId: number}
-}
-type LogoutResponceType = {
-  resultCode: ResultCodesEnum,
-  messages: Array<string>,
-  data: object
+
+type LoginResponceDataType = {
+  userId: number
 }
 
 export const authAPI = {
   async auth() {
-    const { data } = await instance.get<AuthResponceType>(`/auth/me`);
+    const { data } = await instance.get<ResponceType<AuthResponceDataType>>(`/auth/me`);
     return { ...data.data, resultCode: data.resultCode };
   },
   async login(loginData: LoginDataType) {
-    const { data } = await instance.post<LoginResponceType>(`/auth/login`, {
+    const { data } = await instance.post<ResponceType<LoginResponceDataType>>(`/auth/login`, {
       ...loginData
     });
     return { ...data };
   },
   async logout() {
-    const { data } = await instance.delete<LogoutResponceType>("/auth/login");
+    const { data } = await instance.delete<ResponceType>("/auth/login");
     return { ...data };
   },
 };
