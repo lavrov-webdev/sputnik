@@ -1,3 +1,4 @@
+import { InferActionsType } from './../types/index';
 import { AppStateType } from './redux-store';
 import { ThunkAction } from "redux-thunk";
 import { authUser } from "./auth-reducer";
@@ -9,8 +10,7 @@ const initialState = {
 };
 
 type InitialStateType = typeof initialState
-
-type ActionsTypes = InituccessActionType
+type ActionsTypes = InferActionsType<typeof actions>
 
 const appReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
   switch (action.type) {
@@ -22,25 +22,20 @@ const appReducer = (state = initialState, action: ActionsTypes): InitialStateTyp
   }
 };
 
-type InituccessActionType = {
-  type: typeof SET_INITIALIZED;
-  payload: {
-    initialized: boolean;
-  };
-};
-
-export const inituccess = (): InituccessActionType => ({
-  type: SET_INITIALIZED,
-  payload: {
-    initialized: true,
-  },
-});
+export const actions = {
+  inituccess: () => ({
+    type: SET_INITIALIZED,
+    payload: {
+      initialized: true,
+    },
+  })
+}
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const initApp = (): ThunkType => async (dispatch: any) => {
   await dispatch(authUser());
-  dispatch(inituccess());
+  dispatch(actions.inituccess());
 };
 
 export default appReducer;

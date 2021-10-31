@@ -21,7 +21,6 @@ const initialState = {
 };
 
 type InitialStateType = typeof initialState;
-
 type ActionsTypes = InferActionsType<typeof actions>
 
 const authReducer = (
