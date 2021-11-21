@@ -18,12 +18,12 @@ export type ProfileContactsType = {
 };
 
 export type ProfileType = {
-  userId: number;
-  lookingForAJob: boolean;
-  lookingForAJobDescription: string;
-  fullName: string;
-  contacts: ProfileContactsType;
-  photos: ProfilePhotosType;
+  userId?: number;
+  lookingForAJob?: boolean;
+  lookingForAJobDescription?: string;
+  fullName?: string;
+  contacts?: ProfileContactsType;
+  photos?: ProfilePhotosType;
 };
 
 export type UserType = {

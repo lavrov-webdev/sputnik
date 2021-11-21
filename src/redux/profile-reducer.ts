@@ -79,23 +79,23 @@ export const actions = {
 	addPost: (postText: string) => ({
 		type: ADD_POST,
 		postText,
-	}),
+	}) as const,
 	setUserProfile: (
 		profile: ProfileType
 	) => ({
 		type: SET_USER_PROFILE,
 		profile,
-	}),
+	}) as const,
 	setStatus: (status: string) => ({
 		type: SET_STATUS,
 		status,
-	}),
+	}) as const,
 	uploadPhotoSuccess: (
 		photos: ProfilePhotosType
 	) => ({
 		type: UPLOAD_PHOTO_SUCCESS,
 		photos,
-	}),
+	}) as const,
 }
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
